@@ -4,9 +4,9 @@ jobs:
     docker:
       - image: 'circleci/node:16'
     environment:
-      HUSKY: 0
+      HUSKY: '0'
       DOCKER_BUILDKIT: 1
-      BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
+      BUILDX_PLATFORMS: linux/arm/v7,linux/arm64/v8,linux/amd64
     steps:
       - setup_remote_docker:
           version: 18.09.3
