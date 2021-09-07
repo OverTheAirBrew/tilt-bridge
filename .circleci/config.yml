@@ -9,7 +9,8 @@ jobs:
       BUILDX_PLATFORMS: linux/arm/v7,linux/arm64/v8,linux/amd64
       DOCKER_CLI_EXPERIMENTAL: enabled
     steps:
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.2
       - checkout
       - run:
           name: install-dockerx
@@ -24,13 +25,16 @@ jobs:
 
             mv docker-buildx ~/.docker/cli-plugins/
             chmod a+x ~/.docker/cli-plugins/docker-buildx
-
+      - run:
+          name: prepare dockerx
+          command: |
             docker buildx install
-            # docker run --rm --privileged multiarch/qemu-user-static:5.2.0-2 --reset -p yes
-            # docker rm -f buildx_buildkit_docker-multiarch0
-            docker buildx create --name docker-multiarch --platform linux/386,linux/amd64,linux/arm/v5,linux/arm/v6,linux/arm/v7,linux/arm64,linux/mips64le,linux/ppc64le,linux/riscv64,linux/s390x
-            docker buildx use docker-multiarch
-
+            docker version
+            docker buildx version
+            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+            docker context create xbuilder
+            docker buildx create xbuilder --name xbuilder --use
+            docker buildx inspect --bootstrap
       - run:
           name: install
           command: npm ci
