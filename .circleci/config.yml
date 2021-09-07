@@ -10,12 +10,6 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - run: |
-          ssh remote-docker \<<EOF
-            sudo bash -c 'echo "{\"experimental\": true}" > /etc/docker/daemon.json'
-            sudo systemctl restart docker
-            sudo docker info
-          EOF
       - run:
           name: install-dockerx
           command: |
@@ -43,7 +37,7 @@ jobs:
           command: |
             # docker build -t overtheairbrew/tilt-bridge .
 
-            docker buildx build \
+            docker buildx build --push \
               --platform $BUILDX_PLATFORMS \
               --tag overtheairbrew/tilt-bridge .
 
