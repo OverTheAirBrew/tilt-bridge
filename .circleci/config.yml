@@ -5,6 +5,8 @@ jobs:
       - image: 'circleci/node:16'
     environment:
       HUSKY: '0'
+      DOCKER_BUILDKIT: 1
+      BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
     steps:
       - setup_remote_docker:
           version: 18.09.3
@@ -12,10 +14,19 @@ jobs:
       - run:
           name: install-dockerx
           command: |
-            apt-get install make curl
-            mkdir -vp ~/.docker/cli-plugins/
-            curl --silent -L --output ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v0.3.1/buildx-v0.3.1.linux-amd64
+            BUILDX_BINARY_URL="https://github.com/docker/buildx/releases/download/v0.6.3/buildx-v0.6.3.linux-amd64"
+
+            curl --output docker-buildx \
+              --silent --show-error --location --fail --retry 3 \
+              "$BUILDX_BINARY_URL"
+
+            mkdir -p ~/.docker/cli-plugins
+
+            mv docker-buildx ~/.docker/cli-plugins/
             chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+            docker buildx install
+            docker run --rm --privileged tonistiigi/binfmt:latest --install "$BUILDX_PLATFORMS"
       - run:
           name: install
           command: npm ci
@@ -26,6 +37,7 @@ jobs:
           name: docker-build
           command: |
             # docker build -t overtheairbrew/tilt-bridge .
+
             docker buildx build \
               --platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
               --tag overtheairbrew/tilt-bridge .
