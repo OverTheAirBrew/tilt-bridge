@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@overtheairbrew/node-logging": "^1.0.2",
-    "axios": "^0.21.3",
+    "axios": "^0.21.4",
     "bleacon-fork": "0.0.7",
     "class-transformer": "^0.4.0",
     "cron-typedi-decorators": "^1.0.2",
