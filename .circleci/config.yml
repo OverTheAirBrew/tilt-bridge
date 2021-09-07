@@ -37,7 +37,7 @@ jobs:
           command: |
             # docker build -t overtheairbrew/tilt-bridge .
 
-            docker buildx build --push \
+            docker buildx build --output=image \
               --platform $BUILDX_PLATFORMS \
               --tag overtheairbrew/tilt-bridge .
 
