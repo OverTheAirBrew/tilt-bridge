@@ -14,10 +14,7 @@ jobs:
       - run:
           name: test
           command: |
-            node ./dist/test/test-startup.js  
-
             npm run test
-            npm run coverage
       - run:
           name: docker-build
           command: |
