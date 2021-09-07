@@ -8,8 +8,7 @@ jobs:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/arm/v7,linux/arm64/v8,linux/amd64
     steps:
-      - setup_remote_docker:
-          version: 18.09.3
+      - setup_remote_docker
       - checkout
       - run:
           name: install-dockerx
