@@ -17,7 +17,10 @@ jobs:
       - run:
           name: docker-build
           command: |
-            docker build -t overtheairbrew/tilt-bridge .
+            # docker build -t overtheairbrew/tilt-bridge .
+            docker buildx build \
+              --platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+              --tag overtheairbrew/tilt-bridge .
       - run:
           name: release
           command: |
