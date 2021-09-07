@@ -6,7 +6,7 @@ jobs:
     environment:
       HUSKY: '0'
     steps:
-      - setup_remote_docker
+      - setup_remote_docker:
           version: 18.09.3
       - checkout
       - run:
