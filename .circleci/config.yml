@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: 'circleci/node:16'
+    environment:
+      HUSKY: '0'
     steps:
       - setup_remote_docker
       - checkout
