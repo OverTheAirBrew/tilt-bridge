@@ -5,7 +5,7 @@
 # RUN npm ci
 # RUN npm run build
 
-FROM node:14-slim
+FROM node:16-slim
 
 WORKDIR /usr/src/tilt-bridge
 
