@@ -6,21 +6,18 @@
       "prerelease": true
     }
   ],
-  "release": {
-    "verifyConditions": {
-      "path": "semantic-release-docker",
-      "registryUrl": "docker.io"
-    },
-    "publish": {
-      "path": "semantic-release-docker",
-      "name": "overtheairbrew/tilt-bridge"
-    }
-  },
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/npm",
     "@semantic-release/github",
-    "@semantic-release/git"
+    "@semantic-release/git",
+    [
+      "semantic-release-docker",
+      {
+        "registryUrl": "docker.io",
+        "name": "overtheairbrew/tilt-bridge"
+      }
+    ]
   ]
 }
