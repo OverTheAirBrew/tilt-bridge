@@ -7,7 +7,15 @@ jobs:
       HUSKY: '0'
     steps:
       - setup_remote_docker
+          version: 18.09.3
       - checkout
+      - run:
+          name: install-dockerx
+          command: |
+            apk add make curl
+            mkdir -vp ~/.docker/cli-plugins/
+            curl --silent -L --output ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v0.3.1/buildx-v0.3.1.linux-amd64
+            chmod a+x ~/.docker/cli-plugins/docker-buildx
       - run:
           name: install
           command: npm ci
