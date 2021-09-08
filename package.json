@@ -10,8 +10,7 @@
     "prebuild": "del '**/*.{js,map,d.ts}' '!node_modules' '!commitlint.config.js'",
     "build": "tsc",
     "prepare": "husky install",
-    "semantic-release": "semantic-release",
-    "precommit": "git pull"
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
