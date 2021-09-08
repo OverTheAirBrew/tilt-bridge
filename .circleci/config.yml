@@ -40,7 +40,7 @@ jobs:
           name: release
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
-            npm run semantic-release || true
+            npm run semantic-release
 
 workflows:
   version: 2
