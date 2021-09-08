@@ -22,8 +22,9 @@ jobs:
             docker buildx install
             docker run --rm --privileged tonistiigi/binfmt:latest --install "$BUILDX_PLATFORMS"
 
-            docker context create build
-            docker buildx create build
+            docker buildx create --name docker-multiarch --platform $BUILDX_PLATFORMS
+            docker buildx inspect --builder docker-multiarch --bootstrap
+            docker buildx use docker-multiarch
       - run:
           name: install
           command: npm ci
