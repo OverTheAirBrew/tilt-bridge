@@ -1,6 +1,6 @@
 {
   "name": "@overtheairbrew/tilt-bridge",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "",
   "main": "dist/application.js",
   "files": [
