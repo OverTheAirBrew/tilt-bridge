@@ -22,7 +22,7 @@
     ],
     "@semantic-release/git",
     [
-      "./docker-buildx",
+      "@overtheairbrew/semantic-release-docker-buildx",
       {
         "registryUrl": "docker.io",
         "name": "overtheairbrew/tilt-bridge"
