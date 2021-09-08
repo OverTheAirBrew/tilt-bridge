@@ -34,9 +34,10 @@ jobs:
       - run:
           name: docker-build
           command: |
-            docker buildx build \
-              --platform $BUILDX_PLATFORMS \
-              --tag overtheairbrew/tilt-bridge .
+            # THIS IS A GATEKEEPER SO WE DONT PUSH WHEN THE DOCKER BUILD FAILS
+             docker buildx build \
+               --platform $BUILDX_PLATFORMS \
+               --tag overtheairbrew/tilt-bridge .
       - run:
           name: release
           command: |
