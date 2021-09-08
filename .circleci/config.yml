@@ -21,26 +21,18 @@ jobs:
 
             docker buildx install
             docker run --rm --privileged tonistiigi/binfmt:latest --install "$BUILDX_PLATFORMS"
-
-            docker buildx create --name docker-multiarch --platform $BUILDX_PLATFORMS
-            docker buildx inspect --builder docker-multiarch --bootstrap
-            docker buildx use docker-multiarch
       - run:
           name: install
           command: npm ci
       - run:
           name: build
           command: npm run build
-      # - run:
-      #     name: docker-build
-      #     command: |
-      #       docker build -t overtheairbrew/tilt-bridge .
-
-      #       # docker buildx build -o type=docker \
-      #       #   --platform $BUILDX_PLATFORMS \
-      #       #   --tag overtheairbrew/tilt-bridge .
-
-      #       docker images
+      - run:
+          name: docker-build
+          command: |
+            docker buildx build \
+              --platform $BUILDX_PLATFORMS \
+              --tag overtheairbrew/tilt-bridge .
       - run:
           name: release
           command: |
