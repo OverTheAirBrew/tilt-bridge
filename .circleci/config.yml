@@ -22,8 +22,7 @@ jobs:
             docker buildx install
             docker run --rm --privileged tonistiigi/binfmt:latest --install "$BUILDX_PLATFORMS"
 
-            docker buildx create --name multiarch-builder --driver docker-container --use tls-environment
-            docker buildx create --bootstrap
+            docker buildx create --name multiarch-builder --driver docker-container --use tls-environment --bootstrap
       - run:
           name: install
           command: npm ci
