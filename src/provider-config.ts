@@ -13,9 +13,6 @@ export interface IConfiguration {
   logging: {
     level: string;
   };
-  database: {
-    path: string;
-  };
   configs?: ConfigurationType[];
 }
 
