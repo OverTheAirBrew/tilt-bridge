@@ -15,7 +15,7 @@ jobs:
       - run:
           name: install-dockerx
           command: |
-            curl --silent -L --output ~/.docker/cli-plugins/docker-buildx "https://github.com/docker/buildx/releases/download/v0.6.3/buildx-v0.6.3.linux-amd64"
+            curl -L --output ~/.docker/cli-plugins/docker-buildx "https://github.com/docker/buildx/releases/download/v0.6.3/buildx-v0.6.3.linux-amd64"
             chmod a+x ~/.docker/cli-plugins/docker-buildx
             docker buildx install
             docker run --rm --privileged tonistiigi/binfmt:latest --install "$BUILDX_PLATFORMS"
