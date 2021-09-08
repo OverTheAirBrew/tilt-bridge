@@ -25,32 +25,24 @@ jobs:
 
             mv docker-buildx ~/.docker/cli-plugins/
             chmod a+x ~/.docker/cli-plugins/docker-buildx
-      - run:
-          name: prepare dockerx
-          command: |
-            docker buildx install
-            docker version
-            docker buildx version
-            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-            docker context create xbuilder
-            docker buildx create xbuilder --name xbuilder --use
-            docker buildx inspect --bootstrap
+
+             docker buildx install
       - run:
           name: install
           command: npm ci
       - run:
           name: build
           command: npm run build
-      - run:
-          name: docker-build
-          command: |
-            docker build -t overtheairbrew/tilt-bridge .
+      # - run:
+      #     name: docker-build
+      #     command: |
+      #       docker build -t overtheairbrew/tilt-bridge .
 
-            # docker buildx build -o type=docker \
-            #   --platform $BUILDX_PLATFORMS \
-            #   --tag overtheairbrew/tilt-bridge .
+      #       # docker buildx build -o type=docker \
+      #       #   --platform $BUILDX_PLATFORMS \
+      #       #   --tag overtheairbrew/tilt-bridge .
 
-            docker images
+      #       docker images
       - run:
           name: release
           command: |
